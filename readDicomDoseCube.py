@@ -33,6 +33,9 @@
 # %
 # %*******************************************************************************
 
+import numpy as np
+import dicom
+
 
 # % Check that the input file exists
 # if (~exist(pcFilePathAndName))
