@@ -239,20 +239,3 @@ data = get(handles.pdTable,'data');
 dosesorted = sortrows(data,-4);
 set(handles.pdTable,'data',dosesorted);
 
-
-% --- Executes on button press in eclipseflag.
-function eclipseflag_Callback(hObject, eventdata, handles)
-% hObject    handle to eclipseflag (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of eclipseflag
-
-
-% --- Executes on button press in raystationflag.
-function raystationflag_Callback(hObject, eventdata, handles)
-% hObject    handle to raystationflag (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hint: get(hObject,'Value') returns toggle state of raystationflag
