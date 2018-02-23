@@ -31,8 +31,8 @@ def read_dicom_dose_cube(file_name):
     if errDz < 0.1:
         dz = dz[0]
     else:
-        print(['z-spacing not uniform! - ' + str(errDz)])
-        print("z-spacing not uniform! - {0}", str(errDz))
+        #print(['z-spacing not uniform! - ' + str(errDz)])
+        print("z-spacing not uniform! - {}".format(str(errDz)))
 
     x = np.linspace(x0, dx, xn)
     y = np.linspace(y0, dy, yn)
