@@ -48,23 +48,23 @@ fname = pcFilePathAndName;
 %
 
 
-dinfo = dicominfo(fname);
-if(~strcmp(dinfo.Modality, 'RTDOSE'))
+dicom_info = dicominfo(fname);
+if(~strcmp(dicom_info.Modality, 'RTDOSE'))
     error(['The input file: ' file ' is not flagged as RTDOSE.']);
 end
-x0 = dinfo.ImagePositionPatient(1);
-y0 = dinfo.ImagePositionPatient(2);
-z0 = dinfo.ImagePositionPatient(3);
+x0 = dicom_info.ImagePositionPatient(1);
+y0 = dicom_info.ImagePositionPatient(2);
+z0 = dicom_info.ImagePositionPatient(3);
 
-T = dinfo.ImageOrientationPatient;
-nx = dinfo.Width;
-ny = dinfo.Height;
-doseScale = dinfo.DoseGridScaling;
-unitStr = dinfo.DoseUnits;
-typeStr = dinfo.DoseType;
-dx = dinfo.PixelSpacing(1);
-dy = dinfo.PixelSpacing(2);
-zoff = dinfo.GridFrameOffsetVector;
+T = dicom_info.ImageOrientationPatient;
+nx = dicom_info.Width;
+ny = dicom_info.Height;
+doseScale = dicom_info.DoseGridScaling;
+unitStr = dicom_info.DoseUnits;
+typeStr = dicom_info.DoseType;
+dx = dicom_info.PixelSpacing(1);
+dy = dicom_info.PixelSpacing(2);
+zoff = dicom_info.GridFrameOffsetVector;
 dz = diff(zoff);
 errDz = norm(diff(dz));
 if errDz < 0.1
@@ -107,7 +107,7 @@ out.T = T;
 out.Units = unitStr;
 out.Type = typeStr;
 % ELEY 121412 - I commented out the following line.  It was causeing problems when reading proton arc therapy distributions, and I don't need it anyway.
-%out.beamNo = dinfo.ReferencedRTPlanSequence.Item_1.ReferencedFractionGroupSequence.Item_1.ReferencedBeamSequence.Item_1.ReferencedBeamNumber;
+%out.beamNo = dicom_info.ReferencedRTPlanSequence.Item_1.ReferencedFractionGroupSequence.Item_1.ReferencedBeamSequence.Item_1.ReferencedBeamNumber;
 
 % ELEY 103112 commented out this message box, I don't need it
 o = sprintf('Done reading RTDOSE file: %s\n', fname);
