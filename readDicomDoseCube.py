@@ -1,8 +1,35 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+ Title:   readDicomDoseCube.m
+ Author:  John Eley
+ Date:    31 October 2012
 
-This is a temporary script file.
+ Purpose: Read DICOM dose into cube structure (3D array)
+
+ Input:   File path to DICOM RT dose file
+
+ Output:  sCube
+          sCube.pppdData
+          sCube.pppdXCoords (mm)
+          sCube.pppdYCoords (mm)
+          sCube.pppdZCoords (mm)
+          sCube.nX
+          sCube.nY
+          sCube.nZ
+          sCube.dDeltaX (mm)
+          sCube.dDeltaY (mm)
+          sCube.dDeltaZ (mm)
+          sCube.dXMin (mm)
+          sCube.dYMin (mm)
+          sCube.dZMin (mm)
+          sCube.dXMax (mm)
+          sCube.dYMax (mm)
+          sCube.dZMax (mm)
+          sCube.pcDataUnits
+
+ Notes:   Uses codes from Mirkovic 2010 readRTDOSE
+
+ Converted to .py by Dan Strauss 2.28.2018
 """
 
 import numpy as np
