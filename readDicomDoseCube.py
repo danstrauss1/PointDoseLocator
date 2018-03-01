@@ -33,16 +33,22 @@
 """
 
 import numpy as np
-import dicom
+import pydicom
+
+# Test File
+file_name = r'C:\Users\User\Documents\DoseVolumeTest\DoseVolumeTest.dcm'
 
 
-def read_dicom_dose_cube(file_name):
-    dicom_info = dicom.read_file(file_name)
+class DoseCube:
 
+    dicom_info = pydicom.read_file(file_name)
+
+    # Coordinate Start
     x0 = dicom_info.ImagePositionPatient[0]
     y0 = dicom_info.ImagePositionPatient[1]
     z0 = dicom_info.ImagePositionPatient[2]
 
+    # Dicom Info
     T = dicom_info.ImageOrientationPatient
     nx = dicom_info.Width
     ny = dicom_info.Height
@@ -55,16 +61,21 @@ def read_dicom_dose_cube(file_name):
     dz = np.diff(zoff)
     errDz = np.linalg.norm(np.diff(dz))
 
-    if errDz < 0.1:
-        dz = dz[0]
-    else:
-        #print(['z-spacing not uniform! - ' + str(errDz)])
-        print("z-spacing not uniform! - {}".format(str(errDz)))
 
-    x = np.linspace(x0, dx, xn)
-    y = np.linspace(y0, dy, yn)
-    for i in zoff:
-        z[i] = z0 + zoff[i]
-    #    z = z0 + zoff
+    def read_dicom_dose_cube(file_name):
 
-    print(z)
+
+        # Throw error if spacing not uniform
+        if errDz < 0.1:
+            dz = dz[0]
+        else:
+            print("z-spacing not uniform! - {}".format(str(errDz)))
+
+        x = np.linspace(x0, dx, xn)
+        y = np.linspace(y0, dy, yn)
+        for i in zoff:
+            z[i] = z0 + zoff[i]
+        #    z = z0 + zoff
+
+        #print(z)
+
