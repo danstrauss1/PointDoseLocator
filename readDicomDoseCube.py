@@ -50,32 +50,39 @@ class DoseCube:
 
     # Dicom Info
     T = dicom_info.ImageOrientationPatient
-    nx = dicom_info.Width
-    ny = dicom_info.Height
+    nx = dicom_info.Columns
+    ny = dicom_info.Rows
     doseScale = dicom_info.DoseGridScaling
     unitStr = dicom_info.DoseUnits
     typeStr = dicom_info.DoseType
     dx = dicom_info.PixelSpacing[0]
     dy = dicom_info.PixelSpacing[1]
     zoff = dicom_info.GridFrameOffsetVector
+    zoff = np.linspace(zoff[0], zoff[-1], num=np.size(zoff))
     dz = np.diff(zoff)
     errDz = np.linalg.norm(np.diff(dz))
 
 
-    def read_dicom_dose_cube(file_name):
 
+    # Throw error if spacing not uniform
+    if errDz < 0.1:
+        dz = dz[0]
+    else:
+        print("z-spacing not uniform! - {}".format(str(errDz)))
 
-        # Throw error if spacing not uniform
-        if errDz < 0.1:
-            dz = dz[0]
-        else:
-            print("z-spacing not uniform! - {}".format(str(errDz)))
+    nz = np.size(zoff)
 
-        x = np.linspace(x0, dx, xn)
-        y = np.linspace(y0, dy, yn)
-        for i in zoff:
-            z[i] = z0 + zoff[i]
-        #    z = z0 + zoff
+    xn = x0 + np.double(nx-1)*dx
+    yn = y0 + np.double(ny-1)*dy
+    zn = z0 + zoff[-1]
+
+    #Build x, y, z coordinate matrices
+    x = np.linspace(x0, dx, xn)
+    y = np.linspace(y0, dy, yn)
+    z = z0 + zoff[:]
+
+    print('done')
+    #z = z0 + zoff
 
         #print(z)
 
