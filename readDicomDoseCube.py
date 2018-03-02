@@ -81,8 +81,16 @@ class DoseCube:
     y = np.linspace(y0, dy, yn)
     z = z0 + zoff[:]
 
-    print('done')
-    #z = z0 + zoff
+    [xd, yd, zd] = np.meshgrid(x, y, z)
 
-        #print(z)
+    imd = doseScale * np.double(np.squeeze(dicom_info.pixel_array))
 
+    dmax = np.max(imd)
+    x0 = np.array((x0, y0, z0))
+    xn = np.array((xn, yn, zn))
+    dx = np.array((dx, dy, dz))
+
+    n = np.array((nx, ny, nz))
+
+    pppdData = imd
+    #pppdData = np.transpose( np.expand_dims(imd, axis=1), (2, 1, 3))
