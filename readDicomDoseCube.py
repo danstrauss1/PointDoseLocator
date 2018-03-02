@@ -93,4 +93,5 @@ class DoseCube:
     n = np.array((nx, ny, nz))
 
     pppdData = imd
-    #pppdData = np.transpose( np.expand_dims(imd, axis=1), (2, 1, 3))
+
+
